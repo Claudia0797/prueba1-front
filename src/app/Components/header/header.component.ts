@@ -9,6 +9,7 @@ import { LocalStorageService } from 'src/app/Services/local-storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent implements OnInit {
   showAuthSection: boolean;
   showNoAuthSection: boolean;
@@ -59,5 +60,27 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     // TODO 15
+    // En este ejercicio vamos a implementar el logout. 
+    // En el fichero header.component.ts en el método logout tenemos que implementar la siguiente lógica (TODO 15): 
+    // ● Utilizando el método remove del servicio localStorageService eliminar el campo user_id 
+    this.localStorageService.remove("user_id");
+
+    // ● Utilizando el método remove del servicio localStorageService eliminar el campo access_token 
+    this.localStorageService.remove("access_token");
+
+    // ● Crear una constante headerInfo de tipo HeaderMenus con las propiedades: 
+    // o showAuthSection: false 
+    // o showNoAuthSection: true 
+    const headerInfo: HeaderMenus = {
+      showAuthSection: false,
+      showNoAuthSection: true,
+    }
+
+    // ● Añadir la siguiente línea para actualizar los puntos de menú: this.headerMenusService.headerManagement.next(headerInfo); 
+    this.headerMenusService.headerManagement.next(headerInfo);
+
+    // ● Y finalmente redireccionar a la home
+    // this.router.navigateByUrl('home');
+    this.home();
   }
 }

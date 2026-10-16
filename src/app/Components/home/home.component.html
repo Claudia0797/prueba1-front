@@ -1,1 +1,50 @@
 <!-- TODO 3 -->
+<div>
+  <h1>Home</h1>
+  <div
+    *ngFor="let post of posts"
+    style="
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    "
+  >
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.description }}</p>
+
+    <p>
+      <strong>Publication date:</strong>
+      {{ post.publication_date | formatDate: 2 }}
+    </p>
+
+    <div style="margin-bottom: 10px">
+      <strong>Categories:</strong>
+
+      <span
+        *ngFor="let cat of post.categories"
+        [style.background-color]="cat.css_color"
+        style="
+          padding: 3px 8px;
+          margin-left: 5px;
+          border-radius: 4px;
+          color: black;
+        "
+      >
+        {{ cat.title }}
+      </span>
+    </div>
+
+    <p>
+      <strong>Likes:</strong> {{ post.num_likes }} | <strong>Dislikes:</strong>
+      {{ post.num_dislikes }}
+    </p>
+
+    <div *ngIf="showButtons">
+      <button (click)="like(post.postId)" style="margin-right: 10px">
+        ❤ Like
+      </button>
+      <button (click)="dislike(post.postId)">💔 Dislike</button>
+    </div>
+  </div>
+</div>

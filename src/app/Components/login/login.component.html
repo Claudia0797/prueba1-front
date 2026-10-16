@@ -5,4 +5,43 @@
   <h1>Login</h1>
 
   <!-- TODO 21 -->
+  <!-- Implementar el formulario reactivo para gestionar todas las propiedades 
+  anteriores. El formulario al hacer submit tendrá que llamar al método login que 
+  tenéis implementado en el controlador, solo debéis descomentar el código para 
+  poder utilizarlo. -->
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <!-- CAMPO EMAIL -->
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" type="text" formControlName="email" />
+      <div *ngIf="email.invalid && (email.touched || email.dirty)">
+        <span class="error" *ngIf="email.errors?.['required']"
+          >Email is required.</span
+        >
+        <span class="error" *ngIf="email.errors?.['email']"
+          >Invalid email format.</span
+        >
+      </div>
+    </div>
+
+    <!-- CAMPO PASSWORD -->
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" type="password" formControlName="password" />
+      <div *ngIf="password.invalid && (password.touched || password.dirty)">
+        <span class="error" *ngIf="password.errors?.['required']"
+          >Password is required.</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            password.errors?.['minlength'] || password.errors?.['maxlength']
+          "
+          >Password must be between 8 and 16 characters.</span
+        >
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Enviar</button>
+  </form>
 </div>

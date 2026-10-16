@@ -45,7 +45,7 @@
     </div>
 
     <div>
-      <label for="description">Css color:</label>
+      <label for="css_color">Css color:</label>
       <input type="text" [formControl]="css_color" />
 
       <div *ngIf="css_color.errors">
@@ -62,6 +62,8 @@
       </div>
     </div>
 
-    <button type="submit">SAVE</button>
+    <button type="submit" [disabled]="categoryForm.invalid">
+      SAVE CATEGORY
+    </button>
   </form>
 </div>

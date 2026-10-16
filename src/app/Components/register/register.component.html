@@ -5,4 +5,142 @@
   <h1>Register</h1>
 
   <!-- TODO 18 -->
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" type="text" formControlName="name" />
+      <div
+        *ngIf="
+          name.invalid && (name.touched || name.dirty || isValidForm === false)
+        "
+      >
+        <span class="error" *ngIf="name.errors?.['required']"
+          >Name is required.</span
+        >
+        <span
+          class="error"
+          *ngIf="name.errors?.['minlength'] || name.errors?.['maxlength']"
+          >Name must be between 5 and 25 characters.</span
+        >
+      </div>
+    </div>
+
+    <div>
+      <label for="surname_1">Surname 1:</label>
+      <input id="surname_1" type="text" formControlName="surname_1" />
+      <div
+        *ngIf="
+          surname_1.invalid &&
+          (surname_1.touched || surname_1.dirty || isValidForm === false)
+        "
+      >
+        <span class="error" *ngIf="surname_1.errors?.['required']"
+          >Surname 1 is required.</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            surname_1.errors?.['minlength'] || surname_1.errors?.['maxlength']
+          "
+          >Surname 1 must be between 5 and 25 characters.</span
+        >
+      </div>
+    </div>
+
+    <div>
+      <label for="surname_2">Surname 2:</label>
+      <input id="surname_2" type="text" formControlName="surname_2" />
+      <div
+        *ngIf="
+          surname_2.invalid &&
+          (surname_2.touched || surname_2.dirty || isValidForm === false)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="
+            surname_2.errors?.['minlength'] || surname_2.errors?.['maxlength']
+          "
+          >Surname 2 must be between 5 and 25 characters.</span
+        >
+      </div>
+    </div>
+
+    <div>
+      <label for="alias">Alias:</label>
+      <input id="alias" type="text" formControlName="alias" />
+      <div
+        *ngIf="
+          alias.invalid &&
+          (alias.touched || alias.dirty || isValidForm === false)
+        "
+      >
+        <span class="error" *ngIf="alias.errors?.['required']"
+          >Alias is required.</span
+        >
+        <span
+          class="error"
+          *ngIf="alias.errors?.['minlength'] || alias.errors?.['maxlength']"
+          >Alias must be between 5 and 25 characters.</span
+        >
+      </div>
+    </div>
+
+    <div>
+      <label for="birth_date">Birth date:</label>
+      <input id="birth_date" type="text" formControlName="birth_date" />
+      <div
+        *ngIf="
+          birth_date.invalid &&
+          (birth_date.touched || birth_date.dirty || isValidForm === false)
+        "
+      >
+        <span class="error" *ngIf="birth_date.errors?.['required']"
+          >Birth date is required.</span
+        >
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" type="text" formControlName="email" />
+      <div
+        *ngIf="
+          email.invalid &&
+          (email.touched || email.dirty || isValidForm === false)
+        "
+      >
+        <span class="error" *ngIf="email.errors?.['required']"
+          >Email is required.</span
+        >
+        <span class="error" *ngIf="email.errors?.['email']"
+          >Invalid email format.</span
+        >
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" type="password" formControlName="password" />
+      <div
+        *ngIf="
+          password.invalid &&
+          (password.touched || password.dirty || isValidForm === false)
+        "
+      >
+        <span class="error" *ngIf="password.errors?.['required']"
+          >Password is required.</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            password.errors?.['minlength'] || password.errors?.['maxlength']
+          "
+          >Password must be between 8 and 16 characters.</span
+        >
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Enviar</button>
+  </form>
 </div>

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class CategoryDTO {\n  constructor(title, description, css_color) {\n    this.title = title;\n    this.description = description;\n    this.css_color = css_color;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

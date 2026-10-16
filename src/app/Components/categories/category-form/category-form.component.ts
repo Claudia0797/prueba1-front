@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
   Validators,
-} from '@angular/forms';
-
-import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryDTO } from 'src/app/Models/category.dto';
-import { CategoryService } from 'src/app/Services/category.service';
-import { LocalStorageService } from 'src/app/Services/local-storage.service';
-import { SharedService } from 'src/app/Services/shared.service';
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CategoryDTO } from "src/app/Models/category.dto";
+import { CategoryService } from "src/app/Services/category.service";
+import { LocalStorageService } from "src/app/Services/local-storage.service";
+import { SharedService } from "src/app/Services/shared.service";
 
 type CategoryFormModel = {
   title: FormControl<string>;
@@ -19,9 +18,9 @@ type CategoryFormModel = {
 };
 
 @Component({
-  selector: 'app-category-form',
-  templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.scss'],
+  selector: "app-category-form",
+  templateUrl: "./category-form.component.html",
+  styleUrls: ["./category-form.component.scss"],
 })
 export class CategoryFormComponent implements OnInit {
   category: CategoryDTO;
@@ -45,8 +44,8 @@ export class CategoryFormComponent implements OnInit {
     private localStorageService: LocalStorageService,
   ) {
     this.isValidForm = null;
-    this.categoryId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.category = new CategoryDTO('', '', '');
+    this.categoryId = this.activatedRoute.snapshot.paramMap.get("id");
+    this.category = new CategoryDTO("", "", "");
     this.isUpdateMode = false;
     this.validRequest = false;
 
@@ -97,7 +96,7 @@ export class CategoryFormComponent implements OnInit {
     let errorResponse: any;
     let responseOK: boolean = false;
     if (this.categoryId) {
-      const userId = this.localStorageService.get('user_id');
+      const userId = this.localStorageService.get("user_id");
       if (userId) {
         this.category.userId = userId;
         try {
@@ -112,13 +111,13 @@ export class CategoryFormComponent implements OnInit {
         }
 
         await this.sharedService.managementToast(
-          'categoryFeedback',
+          "categoryFeedback",
           responseOK,
           errorResponse,
         );
 
         if (responseOK) {
-          this.router.navigateByUrl('categories');
+          this.router.navigateByUrl("categories");
         }
       }
     }
@@ -128,7 +127,7 @@ export class CategoryFormComponent implements OnInit {
   private async createCategory(): Promise<boolean> {
     let errorResponse: any;
     let responseOK: boolean = false;
-    const userId = this.localStorageService.get('user_id');
+    const userId = this.localStorageService.get("user_id");
     if (userId) {
       this.category.userId = userId;
       try {
@@ -140,13 +139,13 @@ export class CategoryFormComponent implements OnInit {
       }
 
       await this.sharedService.managementToast(
-        'categoryFeedback',
+        "categoryFeedback",
         responseOK,
         errorResponse,
       );
 
       if (responseOK) {
-        this.router.navigateByUrl('categories');
+        this.router.navigateByUrl("categories");
       }
     }
 
@@ -165,5 +164,13 @@ export class CategoryFormComponent implements OnInit {
     this.category = new CategoryDTO(title, description, css_color);
 
     // TODO 10
+    //  Implementar un if / else de manera que:
+    // o Si la variable isUpdateMode es true:
+    if (this.isUpdateMode) {
+      this.validRequest = await this.editCategory();
+    } else {
+      // Si no:
+      this.validRequest = await this.createCategory();
+    }
   }
 }

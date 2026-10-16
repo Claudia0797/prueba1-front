@@ -3,4 +3,103 @@
 </div>
 <div>
   <!-- TODO 14 -->
+  <!-- // En la vista post-form.component.html tendremos que implementar:
+  // ● Implementar el formulario reactivo para gestionar todas las propiedades de la entidad post (title, description, publication_date y categories asociadas) El formulario al hacer submit tendrá que llamar al método savePost.
+  // ● No quitéis el div de la parte superior ya que vincula el id=”postFeedback” con los estilos y con el servicio managementToast. Tendréis que hacer uso de manera semejante a como se utiliza en el CRUD de categorías. -->
+
+  <h1>Post form</h1>
+  <form *ngIf="postForm" [formGroup]="postForm" (ngSubmit)="savePost()">
+    <!-- Título -->
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" [formControl]="title" />
+
+      <div *ngIf="title.errors">
+        <div
+          *ngIf="title.errors && isValidForm != null && !isValidForm"
+          [ngClass]="'error'"
+        >
+          <div *ngIf="title.errors.required">Title is required</div>
+
+          <div *ngIf="title.errors.maxlength">
+            Title can be max 55 characters long.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" [formControl]="description" />
+
+      <div *ngIf="description.errors">
+        <div
+          *ngIf="description.errors && isValidForm != null && !isValidForm"
+          [ngClass]="'error'"
+        >
+          <div *ngIf="description.errors.required">Description is required</div>
+
+          <div *ngIf="description.errors.maxlength">
+            Description can be max 255 characters long.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fecha publicación-->
+    <div>
+      <label for="publication_date">Publication date: </label>
+      <input
+        id="publication_date"
+        type="date"
+        formControlName="publication_date"
+      />
+      <div
+        *ngIf="
+          publication_date.invalid &&
+          (publication_date.touched ||
+            publication_date.dirty ||
+            isValidForm === false)
+        "
+      >
+        <div *ngIf="publication_date.errors?.['required']" [ngClass]="'error'">
+          Publication date is required.
+        </div>
+        >
+      </div>
+    </div>
+
+    <!-- Categoría (Desplegable múltiple) -->
+    <div>
+      <label for="categories">Choose categories: </label>
+      <br />
+      <select
+        id="categories"
+        formControlName="categories"
+        multiple
+        style="min-width: 200px; min-height: 100px"
+      >
+        <option *ngFor="let cat of categoriesList" [ngValue]="cat">
+          {{ cat.title }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          categories_control.invalid &&
+          (categories_control.touched ||
+            categories_control.dirty ||
+            isValidForm === false)
+        "
+      >
+        <small
+          style="color: red; display: block"
+          *ngIf="categories_control.errors?.['required']"
+          >At least one category is required.</small
+        >
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="postForm.invalid">SAVE POST</button>
+  </form>
 </div>

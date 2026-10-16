@@ -1,0 +1,43 @@
+En el componente home.component tendremos el listado de todos los posts de la 
+plataforma. El componente está por terminar. La idea sería que se muestre el listado de 
+posts más o menos como se muestra en el video. Maquetad el aspecto como queráis. 
+Cosas que debemos tener en cuenta: 
+- En el controlador home.component.ts: falta implementar la carga de todos los 
+posts en el método loadPosts. Para ello debemos seguir la lógica siguiente: 
+o Definir la variable errorResponse. 
+o Leer de localStorageService el campo userId, si lo tenemos, asignar a la 
+variable showButtons a true. Esta variable nos servirá después para 
+mostrar o no los botones de like o dislike de la vista. 
+o Implementar el try/catch para llamar al getPosts y guardar el resultado en 
+la variable posts. 
+o En caso de error pasárselo al sharedService.errorLog. 
+Buscad en el proyecto la etiqueta: 
+
+TODO 2 - 
+Implementar la vista home.component.html: en la vista tendremos que 
+implementar un ngFor de la variable posts y maquetar cada post. En cada post 
+mostraremos todos los campos y además todas las categorías asociadas. Pensad 
+que a cada categoría tenemos que pasarle en los estilos su color de fondo que 
+viene definido por la propiedad category.css_color. Finalmente, en función de la 
+variable showButtons mostraremos los botones de like y dislike.  
+Buscad en el proyecto la etiqueta:
+
+TODO 3 
+Fijaros como queda el resultado en el video explicativo para tener una referencia. 
+ 
+Ejercicio 8 
+En la pantalla home, donde tenemos el listado de todos los posts de la plataforma, de 
+entre todos los campos de un post tenemos el campo fecha de publicación. Si mostramos 
+el campo tal cual nos viene de base de datos veríamos algo así: 
+En este ejercicio se pide implementar un pipe de manera que de un formato amigable a 
+la fecha. Concretamente deberemos implementar un pipe que reciba un numero como 
+argumento, de manera que: - - - - 
+Pasamos un 1 nos devolverá el formato  25092021 
+Pasamos un 2 nos devolverá el formato  25 / 09 / 2021 
+Pasamos un 3 nos devolverá el formato  25/09/2021 
+Pasamos un 4 nos devolverá el formato  2021-09-25 
+** Pensad que si el número del día o del mes es menor a 10 tendremos que concatenarle 
+un cero delante nosotr@s. 
+Buscad en el proyecto la etiqueta: 
+TODO 1 
+Fijaros como queda el resultado en el video explicativo para tener una referencia. .
